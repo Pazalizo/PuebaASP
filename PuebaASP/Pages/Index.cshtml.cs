@@ -12,18 +12,16 @@ namespace PuebaASP.Pages
 {
     public class IndexModel : PageModel
     {
-        private readonly PruebaASP.Data.MyDbContext _context;
+        private readonly ILogger<IndexModel> _logger;
 
-        public IndexModel(PruebaASP.Data.MyDbContext context)
+        public IndexModel(ILogger<IndexModel> logger)
         {
-            _context = context;
+            _logger = logger;
         }
 
-        public IList<Persona> Persona { get;set; } = default!;
-
-        public async Task OnGetAsync()
+        public void OnGet()
         {
-            Persona = await _context.Personas.ToListAsync();
+
         }
     }
 }

@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using PruebaASP.Data;
@@ -11,9 +12,11 @@ using PruebaASP.Data;
 namespace PuebaASP.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240903152243_AerolizoV1")]
+    partial class AerolizoV1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -58,15 +61,10 @@ namespace PuebaASP.Migrations
                     b.Property<int>("Code")
                         .HasColumnType("integer");
 
-                    b.Property<int>("FlightId")
-                        .HasColumnType("integer");
-
                     b.Property<int>("PassengerId")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("FlightId");
 
                     b.HasIndex("PassengerId");
 
@@ -198,19 +196,11 @@ namespace PuebaASP.Migrations
 
             modelBuilder.Entity("PuebaASP.Models.Booking", b =>
                 {
-                    b.HasOne("PuebaASP.Models.Flight", "Flight")
-                        .WithMany()
-                        .HasForeignKey("FlightId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("PuebaASP.Models.Passenger", "Passenger")
                         .WithMany()
                         .HasForeignKey("PassengerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Flight");
 
                     b.Navigation("Passenger");
                 });

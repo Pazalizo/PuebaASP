@@ -11,6 +11,9 @@ namespace PruebaASP.Data
         public DbSet<Crew> Crews { get; set; }
         public DbSet<Flight> Flights { get; set; }
         public DbSet<Plane> Planes { get; set; }
+        public DbSet<Booking> Bookings { get; set; }
+        public DbSet<Passenger> Passengers { get; set; }
+        public DbSet<Luggage> Luggage { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Flight>()
@@ -32,6 +35,21 @@ namespace PruebaASP.Data
                 .HasOne(c => c.Crew)
                 .WithMany()
                 .HasForeignKey(c => c.CrewId);
+
+            modelBuilder.Entity<Booking>()
+                .HasOne(p => p.Passenger)
+                .WithMany()
+                .HasForeignKey(p => p.PassengerId);
+
+            modelBuilder.Entity<Passenger>()
+                .HasOne(l => l.Luggage)
+                .WithOne()
+                .HasForeignKey<Passenger>(l => l.LuggageId);
+
+            modelBuilder.Entity<Booking>()
+                .HasOne(f => f.Flight)
+                .WithMany()
+                .HasForeignKey(f => f.FlightId);
         }
     }
 }
