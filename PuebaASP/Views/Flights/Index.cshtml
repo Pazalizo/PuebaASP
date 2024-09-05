@@ -1,0 +1,33 @@
+﻿@model IEnumerable<PuebaASP.Models.Flight>
+
+<h1>Flights</h1>
+
+<p>
+    <a asp-controller="Flights" asp-action="Create" class="btn btn-primary">Create New</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Code</th>
+            <th>Airport Origin</th>
+            <th>Airport Destination</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Code</td>
+                <td>@item.AirportOrigin.Name</td>
+                <td>@item.AirportDestination.Name</td>
+                <td>
+                    <a asp-controller="Flights" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning">Edit</a>
+                    <a asp-controller="Flights" asp-action="Details" asp-route-id="@item.Id" class="btn btn-info">Details</a>
+                    <a asp-controller="Flights" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

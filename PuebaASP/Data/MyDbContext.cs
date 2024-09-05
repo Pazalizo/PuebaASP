@@ -13,7 +13,7 @@ namespace PruebaASP.Data
         public DbSet<Plane> Planes { get; set; }
         public DbSet<Booking> Bookings { get; set; }
         public DbSet<Passenger> Passengers { get; set; }
-        public DbSet<Luggage> Luggage { get; set; }
+        public DbSet<Luggage> Luggages { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Flight>()
